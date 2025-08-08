@@ -3,7 +3,7 @@ session_start();
 require_once 'conexao.php';
 require_once 'funcoes_email.php';
 
-if($_SERVE["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
     $email=$_POST['email'];
 
     //VERIFICA SE O EMAIL EXISTE NO BANCO DE DADOS
