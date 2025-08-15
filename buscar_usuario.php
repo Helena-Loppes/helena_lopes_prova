@@ -70,6 +70,9 @@ $usuarios = $stmt->fetchALL(PDO::FETCH_ASSOC);
                     <td>
                         <a href="alterar_usuario.php?id=<?=htmlspecialchars($usuario['id_usuario'])?>
                         "onclick="return confirm('Tem certeza que deseja excluir este usuario?')">Excluir</a>
+
+                        <a href="excluir_usuario.php?id=<?=htmlspecialchars($usuario['id_usuario'])?>" 
+                        onclick="return confirm('Tem certeza que deseja excluir este usuario?')">Excluir</a>
                     </td>
                 </tr>
                 <?php endforeach;?>
