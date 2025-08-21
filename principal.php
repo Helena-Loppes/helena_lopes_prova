@@ -68,6 +68,68 @@ $opcoes_menu = $permissoes[$id_perfil];
     <title>Painel Principal</title>
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js"></script>
+    <!-- CSS para o menu amarelinho -->
+    <style>
+
+        header {
+            background-color: #f5f5f5;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            background-color: #ffc107; /* amarelo */
+        }
+
+        .menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .menu > li {
+            position: relative;
+        }
+
+        .menu > li > a {
+            display: block;
+            padding: 14px 20px;
+            color: #ffffffff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .menu > li > a:hover {
+            background-color: #ffca2c; /* tom mais escuro no hover */
+            color: #ffffffff;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #fff3cd; /* amarelo claro */
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border: 1px solid #ffffffff;
+            z-index: 1000;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 16px;
+            text-decoration: none;
+            color: #ffbf00ff;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #ffe8a1;
+        }
+
+    </style>
 </head>
 <body>
     <header>
@@ -98,6 +160,6 @@ $opcoes_menu = $permissoes[$id_perfil];
         </ul>
     </nav>
 
-    
+    <address>Helena Lopes - Desenvolvimento de Sistemas - Senai</address>
 </body>
 </html>

@@ -49,6 +49,6 @@ if($_SERVER["REQUEST_METHOD"]== "POST"){
 
         <button type="submit">Enviar a senha temporaria</button>
     </form>
-    
+    <address>Helena Lopes - Desenvolvimento de Sistemas - Senai</address>
 </body>
 </html>

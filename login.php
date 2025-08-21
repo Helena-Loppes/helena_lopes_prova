@@ -55,6 +55,6 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
     </form>
 
     <p><a href="recuperar_senha.php">Esqueci a minha senha</a></p>
-    
+    <address>Helena Lopes - Desenvolvimento de Sistemas - Senai</address>
 </body>
 </html>
