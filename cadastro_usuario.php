@@ -172,5 +172,6 @@ $permissoes = [
     
     <a href="principal.php">Voltar</a>
     <address>Helena Lopes - Desenvolvimento de Sistemas - Senai</address>
+    <script src="validacoes.js"></script>
 </body>
 </html>
