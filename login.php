@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD']== "POST"){
         }
     }else{
         //L O G I N  I N V A L I D O  
-        echo "<script>alert('E-mail ou senha incorretos');window.location.href='index.php';</script>";
+        echo "<script>alert('E-mail ou senha incorretos');window.location.href='login.php';</script>";
     }
 }
 ?>
