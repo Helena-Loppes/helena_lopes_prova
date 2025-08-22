@@ -9,7 +9,7 @@ if ($_SESSION['perfil'] != 1) {
 }
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $nome_fornecedor = $_POST['nome'];
+    $nome_fornecedor = $_POST['nome_fornecedor'];
     $endereco = $_POST['endereco'];
     $telefone = $_POST['telefone'];
     $email = $_POST['email'];
@@ -24,31 +24,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     }
     if (strlen($nome_fornecedor) > 100) {
         $erros[] = "O nome do fornecedor deve ter no máximo 100 caracteres.";
-    }
-    
-    // Validação do endereço
-    if (strlen($endereco) < 5) {
-        $erros[] = "O endereço deve ter pelo menos 5 caracteres.";
-    }
-    if (strlen($endereco) > 255) {
-        $erros[] = "O endereço deve ter no máximo 255 caracteres.";
-    }
-    
-    // Validação do telefone
-    $telefone_numeros = preg_replace('/\D/', '', $telefone); // Remove caracteres não numéricos
-    if (strlen($telefone_numeros) < 10) {
-        $erros[] = "O telefone deve ter pelo menos 10 dígitos.";
-    }
-    if (strlen($telefone_numeros) > 11) {
-        $erros[] = "O telefone deve ter no máximo 11 dígitos.";
-    }
-    
-    // Validação do email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erros[] = "Digite um e-mail válido.";
-    }
-    if (strlen($email) > 100) {
-        $erros[] = "O e-mail deve ter no máximo 100 caracteres.";
     }
     
     // Verificar se email já existe
@@ -174,10 +149,6 @@ $permissoes = [
         display: block;
     }
 
-    /* ESPAÇAMENTO DO CONTEÚDO PARA NÃO FICAR ATRÁS DO MENU FIXO */
-    body {
-        padding-top: 48px; /* altura aproximada do menu */
-    }
 
     address {
         margin-top: 50px;
@@ -185,6 +156,14 @@ $permissoes = [
         color: #555;
         text-align: center;
     }
+    .telefone {
+                width: 80%; /* Ocupa toda a largura do formulário */
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
 </style>
 </head>
 <body>
@@ -204,39 +183,71 @@ $permissoes = [
             <?php endforeach; ?>
         </ul>
     </nav>
+    <h2 class="content">Cadastrar Fornecedor</h2>
 
-    <!-- CONTEÚDO ORIGINAL MANTIDO -->
-    <h2>Cadastrar Fornecedor</h2>
-    <form action="cadastro_fornecedor.php" method="POST">
-        <label for="nome">Nome Fornecedor:</label>
-        <input type="text" id="nome" name="nome" required>
+    <form action="cadastro_fornecedor.php" method="POST" id="formCadastro">
+        <label for="nome_fornecedor"> Nome do Fornecedor: </label>
+        <input type="text" name="nome_fornecedor" id="nome_fornecedor" required>
 
-        <label for="endereco">Endereço:</label>
-        <input type="text" id="endereco" name="endereco" required>
+        <label for="endereco"> Endereço: </label>
+        <input type="text" name="endereco" id="endereco" required>
 
-        <label for="telefone">Telefone:</label>
-        <input type="tel" id="telefone" minlength="8" maxlength="11" name="telefone"  required>
+        <label for="telefone"> Telefone: </label>
+        <input type="tel" name="telefone" minlength="8" minlength="11" id="telefone" class="telefone" required>
 
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
+        <label for="email"> E-mail: </label>
+        <input type="email" name="email" id="email" required>
 
-        <label for="contato">Contato:</label>
-        <input type="text" id="contato" name="contato" 
-        placeholder="Nome do fornecedor responsavel" required>
+        <label for="contato"> Contato: </label>
+        <input type="text" name="contato" id="contato" required>
 
-        <button type="submit">Salvar</button>
-        <button type="reset">Cancelar</button>
+        <button type="submit"> Salvar </button>
+        <button type="reset"> Cancelar </button>
     </form>
+    
+    <a class="voltar" href="principal.php"> Voltar </a>
+
+    <script>
     
     <a href="principal.php">Voltar</a>
     <address>Helena Lopes - Desenvolvimento de Sistemas - Senai</address>
     <script>
+        <a class="voltar" href="principal.php"> Voltar </a>
+
+<script>
+        const telefone = document.getElementById("telefone");
+        telefone.addEventListener('input', function () {
+            let telefone = this.value.replace(/\D/g, "");
+
+            if (telefone.length > 10) {
+                    telefone = telefone.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
+                } else if (telefone.length > 5) {
+                    telefone = telefone.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+                } else if (telefone.length > 2) {
+                    telefone = telefone.replace(/^(\d{2})(\d{0,5}).*/, "($1) $2");
+                } else {
+                    telefone = telefone.replace(/^(\d*)/, "($1");
+                }
+
+            this.value = telefone;
+        });
+    </script>
+
+    <script>
         document.getElementById("formCadastro").addEventListener("submit", function(event) {
-            let nome = document.getElementById("nome").value.trim();
-            let senha = document.getElementById("senha").value;
+            let nome = document.getElementById("nome_fornecedor").value.trim();
+            let contato = document.getElementById("contato").value.trim();
+            let telefone = document.getElementById("telefone").value.trim();
 
             // Regex: aceita apenas letras (maiúsculas e minúsculas) e espaços
             let nomeRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+            let contatoRegex = /^[A-Za-zÀ-ÿ\s]+$/;
+
+            if (nome.length < 3) {
+                alert("O nome deve conter pelo menos 3 caracteres.")
+                event.preventDefault();
+                return;
+            }
 
             if (!nomeRegex.test(nome)) {
                 alert("O nome não pode conter números ou caracteres especiais!");
@@ -244,13 +255,26 @@ $permissoes = [
                 return;
             }
 
-            // Validação da senha: mínimo de 8 caracteres
-            if (numero.length < 11) {
-                alert("A o nunero deve ter no mínimo 8 caracteres!");
+            if (contato.length < 3) {
+                alert("O contato deve conter pelo menos 3 caracteres.");
                 event.preventDefault();
                 return;
             }
+
+            if (!contatoRegex.test(contato)) {
+                alert("O contato não pode conter números ou caracteres especiais!");
+                event.preventDefault();
+                return;
+            }
+
+            if (telefone.length !== 15) {
+                alert('Telefone inválido!');
+                event.preventDefault();
+                return;
+            }
+            if (telefoneInput) {
+            Inputmask({ mask: ["(99) 9999-9999", "(99) 99999-9999"], keepStatic: true }).mask(telefoneInput);
+        }
         });
-    </script>
 </body>
 </html>
