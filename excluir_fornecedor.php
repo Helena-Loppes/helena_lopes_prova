@@ -159,33 +159,33 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 </nav>
 
 <!-- CONTEÚDO ORIGINAL MANTIDO -->
-<h2 class="content">Excluir Usuário</h2>
+<h2 class="content">Excluir Fornecedor</h2>
 
 <?php if (!empty($fornecedor)) { ?>
     <table class="table table-striped table-bordered align-middle">
         <thead class="table-dark">
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Perfil</th>
-                <th>Ações</th>
+                <th> ID </th>
+                <th> Nome </th>
+                <th> Endereço </th>
+                <th> Telefone </th>
+                <th> E-mail </th>
+                <th> Contato </th>
+                <th> Ações </th>
+            </tr>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($fornecedor as $fornecedor) { ?>
                 <tr>
+                    <td><?= htmlspecialchars($fornecedor['id_fornecedor']) ?></td>
                     <td><?= htmlspecialchars($fornecedor['nome_fornecedor']) ?></td>
                     <td><?= htmlspecialchars($fornecedor['endereco']) ?></td>
                     <td><?= htmlspecialchars($fornecedor['telefone']) ?></td>
                     <td><?= htmlspecialchars($fornecedor['email']) ?></td>
                     <td><?= htmlspecialchars($fornecedor['contato']) ?></td>
                     <td>
-                        <a href="excluir_fornecedor.php?id=<?= htmlspecialchars($fornecedor['id_fornecedor']) ?>" 
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('Tem certeza que deseja excluir este usuário?')">
-                           Excluir
-                        </a>
+                    <a href="excluir_fornecedor.php?id=<?= htmlspecialchars($fornecedor['id_fornecedor']) ?>" class="excluir"onclick="return confirm('Tem certeza que deseja excluir este fornecedor?')"> Excluir </a>
                     </td>
                 </tr>
             <?php } ?>
@@ -197,7 +197,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 <!-- Botão Voltar centralizado -->
 <div class="text-center mt-4">
-    <a href="principal.php" class="btn btn-secondary">Voltar</a>
+    <a href="principal.php" >Voltar</a>
 </div>
 
 <address>Helena Lopes - Desenvolvimento de Sistemas - Senai</address>
