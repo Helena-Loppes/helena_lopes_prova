@@ -202,7 +202,7 @@ $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </td>
                     </tr>
                 <?php endforeach; ?>
-            </tbody>
+            </body>
         </table>
     <?php else: ?>
         <div class="alert alert-info">Nenhum usuário encontrado.</div>
